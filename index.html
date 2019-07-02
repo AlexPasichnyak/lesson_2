@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Урок 2</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+  <link rel="stylesheet" href="./styles/style.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i">
+  <link rel="stylesheet" href="./styles/font-awesome-4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+  <section class="block-header">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col col-md-8 text-center">
+        	<h1><a class="nav-link" href="/">Основы HTML CSS</a></h1>
+        </div>
+      </div>
+    </div>
+  </section>
+  <header class="b-b">
+    <section class="block-nav">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-12 text-center">
+            <h2>Проект создан для демонстрации уровня умения верстки</h2>
+          </div>  
+        </div>
+      </div>
+    </section>
+    <section>
+      <div class="container">
+        <div class="row">
+            <div class="col-12 col-lg-6 text-center">
+                <div class="details_link shad">
+                  <a href="#html" class="d-bl"><i class="fa fa-html5 fs10" aria-hidden="true"></i></a>
+                  <input type="checkbox" id="bottom-button">
+                  <div class="description">
+                    <div class="list-group">
+                      <a href="#html1" class="list-group-item list-group-item-action"><i class="fa fa-tags p-r" aria-hidden="true"></i><h4>Теги</h4></a>
+                      <a href="#html2" class="list-group-item list-group-item-action"><i class="fa fa-sitemap p-r" aria-hidden="true"></i><h4>Структура html страницы</h4></a>
+                      <a href="#html3" class="list-group-item list-group-item-action"><i class="fa fa-arrows p-r" aria-hidden="true"></i><h4>Блочные и строчные элементы</h4></a>
+                      <a href="#html4" class="list-group-item list-group-item-action"><i class="fa fa-list p-r" aria-hidden="true"></i><h4>Списки</h4></a>
+                      <a href="#html5" class="list-group-item list-group-item-action"><i class="fa fa-table p-r" aria-hidden="true"></i><h4>Таблицы</h4></a>
+                      <a href="#html5" class="list-group-item list-group-item-action"><i class="fa fa-anchor p-r" aria-hidden="true"></i><h4>Якоря</h4></a>
+                    </div>
+                  </div>
+                  <label for="bottom-button"></label>
+                </div>
+            </div>
+          <div class="col-12 col-lg-6 text-center">
+                <div class="details_link shad">
+                  <a href="#css" class="d-bl"><i class="fa fa-css3 fs10" aria-hidden="true"></i></a>
+                  <input type="checkbox" id="bottom-button2">
+                  <div class="description">
+                    <div class="list-group">
+                      <a href="#css0" class="list-group-item list-group-item-action"><i class="fa fa-edit p-r" aria-hidden="true"></i><h4>Стили</h4></a>
+                      <a href="#css1" class="list-group-item list-group-item-action"><i class="fa fa-flask p-r" aria-hidden="true"></i><h4>Классы</h4></a>
+                      <a href="#css2" class="list-group-item list-group-item-action"><i class="fa fa-hashtag p-r" aria-hidden="true"></i><h4>Идентификаторы</h4></a>
+                      <a href="#css3" class="list-group-item list-group-item-action"><i class="fa fa-sort p-r" aria-hidden="true"></i><h4>Cелекторы</h4></a>
+                      <a href="#css4" class="list-group-item list-group-item-action"><i class="fa fa-filter p-r" aria-hidden="true"></i><h4>Псевдоклассы</h4></a>
+                      <a href="#css5" class="list-group-item list-group-item-action"><i class="fa fa-filter p-r" aria-hidden="true"></i><h4>Псевдоэлементы</h4></a>
+                    </div>
+                  </div>
+                  <label for="bottom-button2"></label>
+                </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </header>
+  <section class="b-b pt-4 pb-4" id="html">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-12 col-md-6 col-lg-5"><h2 id="html1"><i class="fa fa-tags p-r" aria-hidden="true"></i>Теги</h2><p class="lead">HTML-теги — основа языка HTML. Теги используются для разграничения начала и конца элементов в разметке. Каждый HTML-документ состоит из дерева HTML-элементов и текста. Каждый HTML-элемент обозначается начальным (открывающим) и конечным (закрывающим) тегом. Открывающий и закрывающий теги содержат имя тега.</p></div>
+        <div class="col-12 col-md-6 ml-md-auto mt-4 mt-md-0">
+          <h3>Все HTML-элементы делятся на пять типов:</h3>
+          <ol class="col-gr">
+            <li>пустые элементы — <kbd>&lt;area&gt;</kbd>, <kbd>&lt;base&gt;</kbd>, <kbd>&lt;br&gt;</kbd>, <kbd>&lt;col&gt;</kbd>, <kbd>&lt;embed&gt;</kbd>, <kbd>&lt;hr&gt;</kbd>, <kbd>&lt;img&gt;</kbd>, <kbd>&lt;input&gt;</kbd> и т.д.;</li>
+            <li>элементы, выводящие неформатированный текст - <kbd>&lt;textarea&gt;</kbd>, <kbd>&lt;title&gt;</kbd>;</li>
+            <li>элементы с неформатированным текстом - <kbd>&lt;script&gt;</kbd>, <kbd>&lt;style&gt;</kbd>;</li>
+            <li>элементы из другого пространства имён - MathML и SVG;</li>
+            <li>обычные элементы - все остальные элементы.</li>
+          </ol>    
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="b-b pt-4 pb-4">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-12 col-md-6 col-lg-5"><h2 id="html2"><i class="fa fa-sitemap p-r" aria-hidden="true"></i>Структура html страницы</h2><img src="img/DOM.png" alt="" class="img-fluid"></div>
+        <div class="col-12 col-md-6 ml-md-auto mt-4 mt-md-0"><p class="lead">Каждый HTML-документ состоит из дерева HTML-элементов и текста. Элементы, находящиеся внутри тега <kbd>&lt;html&gt;</kbd>, образуют дерево документа, так называемую объектную модель документа, DOM (document object model). При этом элемент <kbd>&lt;html&gt;</kbd> является корневым элементом.</p>
+          <p class="lead">
+            Чтобы разобраться во взаимодействии элементов веб-страницы, необходимо рассмотреть так называемые <strong>«родственные отношения»</strong> между элементами. Отношения между множественными вложенными элементами подразделяются на родительские, дочерние и сестринские.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="b-b pt-4 pb-4">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-12 col-md-6 col-lg-5"><h2 id="html3"><i class="fa fa-tasks p-r" aria-hidden="true"></i>Блочные и строчные элементы</h2><img src="img/dbdi.png" alt="" class="img-fluid"></div>
+        <div class="col-12 col-md-6 ml-md-auto mt-4 mt-md-0"><p class="lead"><strong>Блочный элемент</strong> представляет собой прямоугольник, который по умолчанию занимает всю доступную ширину страницы (если иное значение не указано в CSS), а длина элемента зависит от его содержимого. Такой элемент всегда начинается с новой строки, то есть, располагается под предыдущим элементом. Блочный элемент может содержать в себе другие блочные и строчные элементы.<br>Примеры блочных элементов: <kbd>&lt;div&gt;</kbd>, <kbd>&lt;p&gt;</kbd>, <kbd>&lt;ul&gt;</kbd>, <kbd>&lt;ol&gt;</kbd>, <kbd>&lt;h1&gt;</kbd></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="b-b pt-4 pb-4">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-12 col-sm-10 col-md-8 col-lg-6 text-center" id="#html4">
+          <h2><i class="fa fa-list p-r" aria-hidden="true"></i>Списки в HTML</h2>
+          <h5><a target="_blank" href="#">Пример нумерованого списка с использованием псевдо-селекторов</a></h5>
+          <ol class="list-counter-square">
+            <li>Маркированный список (элементы списка начинаются с маркера, к  примеру, &bull; )</li>
+            <li>Нумерованный список – это набор элементов, порядок которых имеет значение. Элементы нумерованного списка начинаются с выражения, включающего номер или букву.</li>
+            <li>Список определений – это список терминов и связанных с ними описаний.</li>
+          </ol>
+        </div>
+        <div class="col-12 col-sm-10 col-md-8 col-lg-6 text-center" id="#html5">
+          <h2><i class="fa fa-table p-r" aria-hidden="true"></i>Таблицы в HTML</h2>
+          <h5><a target="_blank" href="https://getbootstrap.com/docs/4.0/content/tables/"><i class="fa fa-external-link-square p-r" aria-hidden="true"></i>(пример от фреймворка Bootstrap)</a></h5>
+          <table class="table table-striped table-dark">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">First</th>
+                <th scope="col">Last</th>
+                <th scope="col">Handle</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">1</th>
+                <td>Mark</td>
+                <td>Otto</td>
+                <td>@mdo</td>
+              </tr>
+              <tr>
+                <th scope="row">2</th>
+                <td>Jacob</td>
+                <td>Thornton</td>
+                <td>@fat</td>
+              </tr>
+              <tr>
+                <th scope="row">3</th>
+                <td>Larry</td>
+                <td>the Bird</td>
+                <td>@twitter</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+  <footer>
+    <div class="container">
+      <div class="row align-items-top text-center">
+        <div class="col-12 col-sm-6 mt-4 mt-sm-0"><h3><strong>Address</strong></h3><p><i class="fa fa-map-signs p-r" aria-hidden="true"></i>25000, Kirovograd region,<br>Ukraine</p><p><a href="tel:+380993700149" rel="noopener noreferrer" target="_blank"><i class="p-r fa fa-phone" aria-hidden="true"></i>+380993700149</a></p><p><a href="mailto:aleksa.intel@gmail.com"><i class="fa fa-envelope-o p-r" aria-hidden="true"></i>aleksa.intel@gmail.com</a></p></div>
+        <div class="col-12 col-md-4 mt-5 mt-md-0">
+          <h3>
+            <a href="https://github.com/AlexPasichnyak/less2" rel="noopener noreferrer" target="_blank"><strong><i class="fa fa-github fa-2x p-r" aria-hidden="true"></i>Designed by Sancho Paska</strong></a>
+          </h3>
+          <p>Get and refine this template <a href="https://github.com/AlexPasichnyak/less2"><i class="fa fa-code-fork" aria-hidden="true"></i></a><br/>
+          We are looking for suggestions for improving design and cooperation</p></div>
+      </div>
+      <div class="row mt-5">
+        <div class="col text-center"><div class="wrapper"><div><p>&copy; 2019, <a href="https://github.com/AlexPasichnyak/" target="_blank"> Oleksandr Pasichnyak <i class="fa fa-github p-r" aria-hidden="true"></i></a> All Rights Reserved</p></div></div></div>
+      </div>
+    </div>
+  </footer>
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
+</body>
+</html>
