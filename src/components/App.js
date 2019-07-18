@@ -5,12 +5,12 @@ import Footer from './Footer/Footer';
 
 
 function App() {
+
     return (
         <Fragment>
             <Header/>
             <Content/>
-            <Footer/>
-            
+            <Footer/>    
         </Fragment>
 
     );

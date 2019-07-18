@@ -1,14 +1,19 @@
 import React from 'react';
 
+
 const ContentBottom = () => {
+
+  const lists = 'Списки в HTML';
+  const tables = 'Таблицы в HTML';
+
   return (
       <section className="b-b pt-4 pb-4">
         <div className="container">
           <div className="row justify-content-center">
             <div className="col-12 col-sm-10 col-md-8 col-lg-6 text-center">
-              <h2 id="html4"><i className="fa fa-list p-r" aria-hidden="true"></i>Списки в HTML</h2>
+              <h2 id="html4"><i className="fa fa-list p-r" aria-hidden="true"></i>{lists}</h2>
               <h5>
-                <a href="#html4" rel="noopener noreferrer">Пример нумерованого списка с использованием псевдо-селекторов</a>
+                <a href="\#" rel="noopener noreferrer">Пример нумерованого списка с использованием псевдо-селекторов</a>
               </h5>
               <ol className="list-counter-square">
                 <li>Маркированный список (элементы списка начинаются с маркера, к  примеру, &bull; )</li>
@@ -17,7 +22,7 @@ const ContentBottom = () => {
               </ol>
             </div>
             <div className="col-12 col-sm-10 col-md-8 col-lg-6 text-center">
-              <h2 id="html5"><i className="fa fa-table p-r" aria-hidden="true"></i>Таблицы в HTML</h2>
+              <h2 id="html5"><i className="fa fa-table p-r" aria-hidden="true"></i>{ tables }</h2>
               <h5>
                 <a target="_blank" href="https://getbootstrap.com/docs/4.0/content/tables/" rel="noopener noreferrer"><i className="fa fa-external-link-square p-r" aria-hidden="true"></i>(пример от фреймворка Bootstrap)</a>
               </h5>

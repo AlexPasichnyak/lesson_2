@@ -1,6 +1,6 @@
 import React from 'react';
 
-import l1ogo1 from './../../../images/DOM.png'
+import dom1 from './../../../images/DOM.png'
 
 
 const ContentTopBottom = () => {
@@ -13,7 +13,7 @@ const ContentTopBottom = () => {
             <h2 id="html2">
               <i className="fa fa-sitemap p-r" aria-hidden="true"></i>Структура html страницы
             </h2>
-            <img src={l1ogo1} className="img-fluid" alt="DOM" />
+            <img src={dom1} className="img-fluid" alt="DOM" />
           </div>
           <div className="col-12 col-md-6 ml-md-auto mt-4 mt-md-0">
             <p className="lead">Каждый HTML-документ состоит из дерева HTML-элементов и текста. Элементы, находящиеся внутри тега <kbd>&lt;html&gt;</kbd>, образуют дерево документа, так называемую объектную модель документа, DOM (document object model). При этом элемент <kbd>&lt;html&gt;</kbd> является корневым элементом.
