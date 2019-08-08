@@ -3,18 +3,20 @@ import React, {Component} from 'react';
 
 class Footer extends Component {
 
-	state = {
-		address: {
-			postcode: 25000,
-			region: 'Kirovograd region',
-			country: 'Ukraine',
-			tel: '+380993700149',
-			email: 'aleksa.intel@gmail.com'
-		},
-		author: 'Oleksandr Pasichnyak',
-		nick: 'Sancho Paska'
+	constructor(props) {
+		super(props)
+		this.state = {
+			address: {
+				postcode: 25000,
+				region: 'Kirovograd region',
+				country: 'Ukraine',
+				tel: '+380993700149',
+				email: 'aleksa.intel@gmail.com'
+			},
+			author: 'Oleksandr Pasichnyak',
+			nick: 'Sancho Paska'
+		}
 	}
-
 
 	render () {
 
