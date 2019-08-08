@@ -8,10 +8,10 @@ import TableBio from './TableBio/TableBio'
 const Content = () => {
 	return (
 		<Fragment>
-           <ContentTop/>
-           <ContentTopBottom/>
-           <ContentBottomTop/>
-           <ContentBottom/>
+				<ContentTop/>
+				<ContentTopBottom/>
+				<ContentBottomTop/>
+				<ContentBottom/>
            <TableBio/>
       	</Fragment>
 	) 

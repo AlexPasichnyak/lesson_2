@@ -32,7 +32,7 @@ export default class TableBio extends Component {
 
 	sortByEvent = () => {
 		const chronology = this.state.chronology.concat()
-	    let left = 0
+		let left = 0
 	    let right = chronology.length - 1
 	    let temp
 	    do {
