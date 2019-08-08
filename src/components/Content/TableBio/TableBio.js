@@ -33,10 +33,10 @@ export default class TableBio extends Component {
 	sortByEvent = () => {
 		const chronology = this.state.chronology.concat()
 		let left = 0
-	    let right = chronology.length - 1
-	    let temp
-	    do {
-	        for (let i = left; i < right; i++) {
+		let right = chronology.length - 1
+		let temp
+		do {
+			for (let i = left; i < right; i++) {
 	            if (chronology[i].eventOfLife > chronology[i + 1].eventOfLife) {
 	                temp = chronology[i]
 	                chronology[i] = chronology[i + 1]
@@ -45,25 +45,25 @@ export default class TableBio extends Component {
 	        }
 	        right--;
 	        for (let i = right; left < i; i--) {
-	            if (chronology[i].eventOfLife < chronology[i - 1].eventOfLife) {
-	                temp = chronology[i]
-	                chronology[i] = chronology[i - 1]
-	                chronology[i - 1] = temp
-	            }
+	        	if (chronology[i].eventOfLife < chronology[i - 1].eventOfLife) {
+	        		temp = chronology[i]
+	        		chronology[i] = chronology[i - 1]
+	        		chronology[i - 1] = temp
+	        	}
 	        }
 	        left++;
 	    } while (left < right);
 
-		this.setState({chronology})
+	    this.setState({chronology})
 	}	
 
 	onAddEventHandler = event => {
   		event.preventDefault();
   		const { chronology } = this.state;
   		const data = new FormData(event.target);
-    	this.setState({
-      		chronology: [...chronology, {year: +data.get('year'), eventOfLife:data.get('eventOfLife')}]
-    	});
+  		this.setState({
+  			chronology: [...chronology, {year: +data.get('year'), eventOfLife:data.get('eventOfLife')}]
+  		});
 	    // console.log(chronology);
 	}
 
