@@ -12,8 +12,8 @@ const Content = () => {
 			<ContentTopBottom/>
 			<ContentBottomTop/>
 			<ContentBottom/>
-           <TableBio/>
-      	</Fragment>
+			<TableBio/>
+		</Fragment>
 	) 
 }
 
