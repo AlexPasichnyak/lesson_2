@@ -5,76 +5,79 @@ export default class TableBio extends Component {
 		super(props)
 		
 		this.state = {
-			chronology: [
-					{year: 1993, eventOfLife: "Народился в с.Дмитровка Знаменского р-на Кировоградской обл."},
-					{year: 1999, eventOfLife: "Пошел в учиться в школу"},
-					{year: 2010, eventOfLife: "Закончил школу"},
-					{year: 2010, eventOfLife: "Поступил в Кировоградский государственный педуниверситет им. В.Винниченка"},
-					{year: 2018, eventOfLife: "Начал изучать веб-программирование"}
-			]
+			chronology: {
+				0: {year: 1993, eventOfLife: "Народился в с.Дмитровка Знаменского р-на Кировоградской обл."},
+				1: {year: 1999, eventOfLife: "Пошел в учиться в школу"},
+				2: {year: 2010, eventOfLife: "Закончил школу"},
+				3: {year: 2010, eventOfLife: "Поступил в Кировоградский государственный педуниверситет им. В.Винниченка"},
+				4: {year: 2018, eventOfLife: "Начал изучать веб-программирование"},
+			}
 		}
 	}
 
 	toggleSortByYear = () => {
-		const arrChronology = [...this.state.chronology];
+		const {chronology} = this.state;
 		const isSorted = this.state.toggleSortByYear
+		const arrObj=Object.values(chronology)
 		if (isSorted) {
-			arrChronology.sort((a, b) => ((a.year) - (b.year)))
+			arrObj.sort((a, b) => ((a.year) - (b.year)))
 		} else {
-			arrChronology.reverse()
+			arrObj.reverse()
 		}
-		
 		this.setState({
-			chronology: arrChronology,
+			chronology: {...arrObj},
 			toggleSortByYear: !isSorted
 		})
 	}
 
 	sortByEvent = () => {
-		const chronology = this.state.chronology.concat()
+		const {chronology} = this.state
+		const arrChronology=Object.values(chronology)
 		let left = 0
-		let right = chronology.length - 1
+		let right = arrChronology.length - 1
 		let temp
 		do {
 			for (let i = left; i < right; i++) {
-	            if (chronology[i].eventOfLife > chronology[i + 1].eventOfLife) {
-	                temp = chronology[i]
-	                chronology[i] = chronology[i + 1]
-	                chronology[i + 1] = temp
+				if (arrChronology[i].eventOfLife > arrChronology[i + 1].eventOfLife) {
+	                temp = arrChronology[i]
+	                arrChronology[i] = arrChronology[i + 1]
+	                arrChronology[i + 1] = temp
 	            }
 	        }
 	        right--;
 	        for (let i = right; left < i; i--) {
-	        	if (chronology[i].eventOfLife < chronology[i - 1].eventOfLife) {
-	        		temp = chronology[i]
-	        		chronology[i] = chronology[i - 1]
-	        		chronology[i - 1] = temp
+	        	if (arrChronology[i].eventOfLife < arrChronology[i - 1].eventOfLife) {
+	        		temp = arrChronology[i]
+	        		arrChronology[i] = arrChronology[i - 1]
+	        		arrChronology[i - 1] = temp
 	        	}
 	        }
 	        left++;
 	    } while (left < right);
-
-	    this.setState({chronology})
+	    this.setState({chronology: {...arrChronology}})
 	}	
 
 	onAddEventHandler = event => {
   		event.preventDefault();
   		const { chronology } = this.state;
   		const data = new FormData(event.target);
+  		let lengthObj = Object.entries(chronology).length;
   		this.setState({
-  			chronology: [...chronology, {year: +data.get('year'), eventOfLife:data.get('eventOfLife')}]
+  			chronology: {...chronology, [lengthObj]:{year: +data.get('year'), eventOfLife:data.get('eventOfLife')}}
   		});
-	    // console.log(chronology);
 	}
 
 	onDelete = () => {
-		const chronology = this.state.chronology.concat()
-		chronology.splice(-1, 1)
-		this.setState({chronology})
+		const {chronology} = this.state
+		const arrChronology = Object.entries(chronology)
+		arrChronology.pop()
+		const res = Object.fromEntries(arrChronology)
+		// console.log(chronology[Object.keys(chronology).splice(-1,1)])
+		this.setState({chronology: {...res}})
 	}
 
 	render() {
-
+		const { chronology } = this.state 
 		return (	
 			<section className="b-b pt-4 pb-4">
 				<div className="container">
@@ -92,13 +95,13 @@ export default class TableBio extends Component {
 			                  </tr>
 			                </thead>
 			                <tbody>
-			       				{this.state.chronology.map((chrono, index) => {
+			       				{Object.entries(chronology).map(([index, chrono]) => {
 							        return (
-									<tr key={index}>
-							            <td>{chrono.year}</td>
-							            <td>{chrono.eventOfLife}</td>
-							        </tr>
-							        )
+										<tr key={index}>
+								            <td>{chrono.year}</td>
+								            <td>{chrono.eventOfLife}</td>
+								        </tr>
+							        ) 
 							      })
 							   }
 			                </tbody>
@@ -106,7 +109,8 @@ export default class TableBio extends Component {
 							<form className="input-group-prepend" onSubmit={this.onAddEventHandler}>
 								<button className="btn btn-success" type="submit"><i className="fa fa-plus-square pr-1" aria-hidden="true"></i>Добавить новое событие</button>
 								 <input type="text" name="year" className="form-control" placeholder="Год" aria-label="" required/>
-								<input type="text" name="eventOfLife" className="form-control mr-5" placeholder="Событие" required />
+								<input type="text" name="eventOfLife" className="form-control mr-5" placeholder="Событие" required />								
+								<input type="hidden" name="count" value={Object.keys(chronology).length}/>
 								<button type="button" className="btn btn-danger ml-5" onClick={this.onDelete}><i className="fa fa-trash pr-1" aria-hidden="true"></i>Удалить Событие</button>
 							</form>
 					</div>
