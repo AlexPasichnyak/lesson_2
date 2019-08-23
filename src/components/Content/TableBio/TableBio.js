@@ -79,11 +79,15 @@ export default class TableBio extends Component {
 
 	componentDidMount(){
 		const url = 'https://jsonplaceholder.typicode.com/users';
-		fetch(url)
-		  .then(response => response.json())
-		  .then(data => {
-		  	this.setState({dataUsers: data})
-		  	})
+		try{
+			fetch(url)
+			  .then(response => response.json())
+			  .then(data => {
+			  	this.setState({dataUsers: data})
+			 })	
+		} catch(e) {
+			console.log(e);
+		}
 	}
 
 	render() {
