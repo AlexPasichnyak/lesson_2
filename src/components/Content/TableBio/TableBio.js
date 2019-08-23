@@ -11,7 +11,8 @@ export default class TableBio extends Component {
 				2: {year: 2010, eventOfLife: "Закончил школу"},
 				3: {year: 2010, eventOfLife: "Поступил в Кировоградский государственный педуниверситет им. В.Винниченка"},
 				4: {year: 2018, eventOfLife: "Начал изучать веб-программирование"},
-			}
+			},
+			dataUsers: {}
 		}
 	}
 
@@ -76,8 +77,18 @@ export default class TableBio extends Component {
 		this.setState({chronology: {...res}})
 	}
 
+	componentDidMount(){
+		const url = 'https://jsonplaceholder.typicode.com/users';
+		fetch(url)
+		  .then(response => response.json())
+		  .then(data => {
+		  	this.setState({dataUsers: data})
+		  	})
+	}
+
 	render() {
 		const { chronology } = this.state 
+		const { dataUsers } = this.state 
 		return (	
 			<section className="b-b pt-4 pb-4">
 				<div className="container">
@@ -113,6 +124,33 @@ export default class TableBio extends Component {
 {/*								<input type="hidden" name="count" value={Object.keys(chronology).length}/>*/}
 								<button type="button" className="btn btn-danger ml-5" onClick={this.onDelete}><i className="fa fa-trash pr-1" aria-hidden="true"></i>Удалить Событие</button>
 							</form>
+					</div>
+				</div>
+				<hr/>
+				<div className="container">
+          			<div className="row justify-content-center">
+						<h2>Рандомные данные о пользователях</h2>
+						<table className="table table-striped table-dark">
+						    <thead>
+			                  <tr>
+			                    <th scope="col">Имя</th>
+			                    <th scope="col">Email</th>
+			                    <th scope="col">Компания</th>
+			                  </tr>
+			                </thead>
+			                <tbody>
+			       				{Object.entries(dataUsers).map(([id, item]) => {
+							        return (
+										<tr key={id}>
+								            <td>{item.name}</td>
+								            <td>{item.email}</td>
+								            <td>{item.company.name}</td>
+								        </tr>
+							        ) 
+							      })
+							   }
+			                </tbody>
+						</table>
 					</div>
 				</div>
 			</section> 
