@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
+import picture from '../../../images/picture_load.png';
 
 export default class TableBio extends Component {
 	constructor(props) {
-		super(props)
+		super(props);
 		
 		this.state = {
 			chronology: {
@@ -12,10 +13,14 @@ export default class TableBio extends Component {
 				3: {year: 2010, eventOfLife: "Поступил в Кировоградский государственный педуниверситет им. В.Винниченка"},
 				4: {year: 2018, eventOfLife: "Начал изучать веб-программирование"},
 			},
-			dataUsers: {}
+			dataUsers: {},
+			isFocus: '',
+			currIndex: ''
 		}
+		
 	}
 
+	
 	toggleSortByYear = () => {
 		const {chronology} = this.state;
 		const isSorted = this.state.toggleSortByYear
@@ -88,6 +93,105 @@ export default class TableBio extends Component {
 		} catch(e) {
 			console.log(e);
 		}
+
+		document.addEventListener('keydown', this.keyDown);
+	}
+
+	keyDown = e => {
+		const table = document.getElementById('table_users');
+		const arrRows = table.childNodes;
+		let elem = -1;
+		if (this.state.isFocus) {
+			for (let i = 0; i < arrRows.length; i++) {
+				if (arrRows[i].classList.value === 'bg-clicked') {
+					elem = i;
+				}
+			}
+		}
+
+		const currentIndex = this.state.currIndex;
+		if (currentIndex && currentIndex + 1 === arrRows.length) {
+			elem = 0;
+		}
+		if (currentIndex && currentIndex - 1 === -1) {
+			elem = arrRows.length;
+		}
+		if (e.key === 'ArrowDown') {
+			elem++;
+			if (this.state.isFocus) {
+				this.setState({isFocus: this.state.isFocus.classList.remove('bg-clicked')});
+			}
+			this.setState({
+				isFocus: arrRows[elem],
+				currIndex: elem
+			});
+			arrRows[elem].classList.add('bg-clicked');
+		}
+
+		if (e.key === 'ArrowUp') {
+			elem--;
+
+			if (this.state.isFocus) {
+				// if (elem === -1) {
+				// 	return false
+				// }
+				this.setState({isFocus: this.state.isFocus.classList.remove('bg-clicked')});
+			}			
+			this.setState({
+				isFocus: arrRows[elem],
+				currIndex: elem
+			});
+
+			arrRows[elem].classList.add('bg-clicked');			
+		}
+
+	}
+
+	dragStart = e => {
+		const target = e.target;
+		e.dataTransfer.setData('row_id', target.id);
+		setTimeout(() => {
+		  target.style.display = 'none';
+		}, 0);
+	}
+
+	dropHandler = e => {
+		e.preventDefault();
+		const row_id = e.dataTransfer.getData('row_id');
+
+		const row = document.getElementById(row_id);
+		row.style.display = 'table-row';
+		e.target.parentNode.after(row);
+		
+	}
+
+	dragOver = (e) => {
+		e.preventDefault();
+	}
+
+	isActiveClass = (e) => {
+	// e.target.parentNode.classList.toggle('bg-clicked');
+		const elem = this.state.isFocus;
+		if (e.target.parentNode.classList.value === 'bg-clicked' && elem) {
+			e.target.parentNode.classList.remove('bg-clicked');
+			this.setState({isFocus: ''})
+		} else if(!elem) {
+			this.setState({isFocus: e.target.parentNode});
+			e.target.parentNode.classList.add('bg-clicked');
+		} else {
+			this.setState({isFocus: this.state.isFocus.classList.remove('bg-clicked')})
+			this.setState({isFocus: e.target.parentNode})
+			e.target.parentNode.classList.add('bg-clicked')
+		}
+		
+	}
+
+	imgLoader = () => {
+		alert('App loaded!')
+	}
+
+	imgErr = () => {
+		alert('Something went wrong! Checking this image!');
 	}
 
 	render() {
@@ -125,7 +229,6 @@ export default class TableBio extends Component {
 								<button className="btn btn-success" type="submit"><i className="fa fa-plus-square pr-1" aria-hidden="true"></i>Добавить новое событие</button>
 								 <input type="text" name="year" className="form-control" placeholder="Год" aria-label="" required/>
 								<input type="text" name="eventOfLife" className="form-control mr-5" placeholder="Событие" required />								
-{/*								<input type="hidden" name="count" value={Object.keys(chronology).length}/>*/}
 								<button type="button" className="btn btn-danger ml-5" onClick={this.onDelete}><i className="fa fa-trash pr-1" aria-hidden="true"></i>Удалить Событие</button>
 							</form>
 					</div>
@@ -134,7 +237,7 @@ export default class TableBio extends Component {
 				<div className="container">
           			<div className="row justify-content-center">
 						<h2>Рандомные данные о пользователях</h2>
-						<table className="table table-striped table-dark">
+						<table className="table table-striped table-dark" onDragOver={this.dragOver} onDrop={this.dropHandler}>
 						    <thead>
 			                  <tr>
 			                    <th scope="col">Имя</th>
@@ -142,10 +245,14 @@ export default class TableBio extends Component {
 			                    <th scope="col">Компания</th>
 			                  </tr>
 			                </thead>
-			                <tbody>
+			                <tbody id="table_users">
 			       				{Object.entries(dataUsers).map(([id, item]) => {
 							        return (
-										<tr key={id}>
+										<tr key={id}
+										 draggable="true" 
+										 onDragStart={this.dragStart} 
+										 id={`row-`+id} 
+										 onClick={this.isActiveClass}>
 								            <td>{item.name}</td>
 								            <td>{item.email}</td>
 								            <td>{item.company.name}</td>
@@ -155,6 +262,7 @@ export default class TableBio extends Component {
 							   }
 			                </tbody>
 						</table>
+						<img className="img-fluid" src={picture} alt='img' onLoad={this.imgLoader} onError={this.imgErr}/>
 					</div>
 				</div>
 			</section> 
