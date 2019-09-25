@@ -1,7 +1,14 @@
 import React, {Component} from 'react';
-import picture from '../../../images/picture_load.png';
+import Form from '../../../elements/Form/Form';
+import TableChrono from './components/TableChrono';
+import Wrapper from './components/Wrapper'
+import TableUsers from './components/TableUsers'
+import WrapSection from './components/WrapSection'
+import picture from '../../../../images/picture_load.png';
+import ImgLoad from '../../../elements/ImgLoad/ImgLoad.js';
+import '../../../../scss/layouts/Pages/Tables.scss'
 
-export default class TableBio extends Component {
+export default class Tables extends Component {
 	constructor(props) {
 		super(props);
 		
@@ -194,78 +201,50 @@ export default class TableBio extends Component {
 		alert('Something went wrong! Checking this image!');
 	}
 
+	chronologyView = () => {
+		const { chronology } = this.state
+		const rows = Object.entries(chronology).map(([index, chrono]) => {
+	        return (
+				<tr key={index}>
+		            <td>{chrono.year}</td>
+		            <td>{chrono.eventOfLife}</td>
+		        </tr>
+	        ) 
+	    })
+	    return rows;				   
+	}
+
+	dataUsersView = () => {
+		const { dataUsers } = this.state;
+		const rows = Object.entries(dataUsers).map(([id, item]) => {
+	        return (
+				<tr key={id}
+				 draggable="true" 
+				 onDragStart={this.dragStart} 
+				 id={`row-`+id} 
+				 onClick={this.isActiveClass}>
+		            <td>{item.name}</td>
+		            <td>{item.email}</td>
+		            <td>{item.company.name}</td>
+		        </tr>
+	        ) 
+	    })
+	    return rows; 
+	}
+
+
 	render() {
-		const { chronology } = this.state 
-		const { dataUsers } = this.state 
-		return (	
-			<section className="b-b pt-4 pb-4">
-				<div className="container">
-          			<div className="row justify-content-center">
-						<h2>Биография</h2>
-						<table className="table table-striped table-dark">
-						    <thead>
-			                  <tr>
-			                    <th scope="col">
-			                    	Год<button className="btn btn-sm btn-secondary ml-2" type="button" onClick={this.toggleSortByYear}><i className="fa fa-sort-numeric-asc pr-1" aria-hidden="true"></i>Сортировать</button>
-			                    </th>
-			                    <th scope="col">Событие
-			                    	<button className="btn btn-sm btn-secondary ml-2" type="button" onClick={this.sortByEvent}><i className="fa fa-sort-alpha-asc pr-1" aria-hidden="true"></i>Сортировать</button>
-			                    </th>
-			                  </tr>
-			                </thead>
-			                <tbody>
-			       				{Object.entries(chronology).map(([index, chrono]) => {
-							        return (
-										<tr key={index}>
-								            <td>{chrono.year}</td>
-								            <td>{chrono.eventOfLife}</td>
-								        </tr>
-							        ) 
-							      })
-							   }
-			                </tbody>
-						</table>
-							<form className="input-group-prepend" onSubmit={this.onAddEventHandler}>
-								<button className="btn btn-success" type="submit"><i className="fa fa-plus-square pr-1" aria-hidden="true"></i>Добавить новое событие</button>
-								 <input type="text" name="year" className="form-control" placeholder="Год" aria-label="" required/>
-								<input type="text" name="eventOfLife" className="form-control mr-5" placeholder="Событие" required />								
-								<button type="button" className="btn btn-danger ml-5" onClick={this.onDelete}><i className="fa fa-trash pr-1" aria-hidden="true"></i>Удалить Событие</button>
-							</form>
-					</div>
-				</div>
-				<hr/>
-				<div className="container">
-          			<div className="row justify-content-center">
-						<h2>Рандомные данные о пользователях</h2>
-						<table className="table table-striped table-dark" onDragOver={this.dragOver} onDrop={this.dropHandler}>
-						    <thead>
-			                  <tr>
-			                    <th scope="col">Имя</th>
-			                    <th scope="col">Email</th>
-			                    <th scope="col">Компания</th>
-			                  </tr>
-			                </thead>
-			                <tbody id="table_users">
-			       				{Object.entries(dataUsers).map(([id, item]) => {
-							        return (
-										<tr key={id}
-										 draggable="true" 
-										 onDragStart={this.dragStart} 
-										 id={`row-`+id} 
-										 onClick={this.isActiveClass}>
-								            <td>{item.name}</td>
-								            <td>{item.email}</td>
-								            <td>{item.company.name}</td>
-								        </tr>
-							        ) 
-							      })
-							   }
-			                </tbody>
-						</table>
-						<img className="img-fluid" src={picture} alt='img' onLoad={this.imgLoader} onError={this.imgErr}/>
-					</div>
-				</div>
-			</section> 
+		return (
+			<WrapSection>
+				<Wrapper title={'Биография'}>
+					<TableChrono view={this.chronologyView()} toggleSortByYear={this.toggleSortByYear} sortByEvent={this.sortByEvent} />
+					<Form onAddEvent={this.onAddEventHandler} onDelete={this.onDelete} />
+				</Wrapper>
+				<Wrapper title={'Рандомные данные о пользователях'}>
+					<TableUsers dragOver={this.dragOver} dropHandler={this.dropHandler} view={this.dataUsersView()} />
+				</Wrapper>
+				<ImgLoad img={picture} loadImg={this.imgLoader} errImg={this.imgErr} />
+			</WrapSection>	
 		)
 	}
 
