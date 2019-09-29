@@ -1,18 +1,24 @@
-import React, {Fragment} from 'react';
+import React from 'react';
+import { string, node } from 'prop-types';
 
 const Wrapper = (props) => {
-
-    return (
-      <Fragment>
-        <div className="container">
-          <div className="row justify-content-center">
-            <h2>{props.title}</h2>
-            {props.children}
-          </div>
+  const { children, title } = props;
+  return (
+    <>
+      <div className="container">
+        <div className="row justify-content-center">
+          <h2>{title}</h2>
+          {children}
         </div>
-        <hr/>
-      </Fragment>
-    )
-}
+      </div>
+      <hr />
+    </>
+  );
+};
 
-export default Wrapper
+Wrapper.propTypes = {
+  title: string.isRequired,
+  children: node.isRequired
+};
+
+export default Wrapper;

@@ -1,21 +1,36 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-const TableUsers = (props) => {
-	return(
+const TableUsers = ({ dragOver, dropHandler, view }) => {
+  return (
+    <table
+      className="table table-striped table-dark" 
+      onDragOver={dragOver} 
+      onDrop={dropHandler}
+    >
+      <thead>
+        <tr>
+          <th scope="col">Имя</th>
+          <th scope="col">Email</th>
+          <th scope="col">Компания</th>
+        </tr>
+      </thead>
+      <tbody id="table_users">
+        {view}
+      </tbody>
+    </table>
+  );
+};
 
-		<table className="table table-striped table-dark" onDragOver={props.dragOver} onDrop={props.dropHandler}>
-		    <thead>
-              <tr>
-                <th scope="col">Имя</th>
-                <th scope="col">Email</th>
-                <th scope="col">Компания</th>
-              </tr>
-            </thead>
-            <tbody id="table_users">
-            	{props.view}
-            </tbody>
-		</table>
-	)
-}
+TableUsers.propTypes = {
+  dragOver: PropTypes.func,
+  dropHandler: PropTypes.func,
+  view: PropTypes.array
+};
+TableUsers.defaultProps = {
+  dragOver: PropTypes.func,
+  dropHandler: PropTypes.func,
+  view: PropTypes.array
+};
 
-export default TableUsers
+export default TableUsers;

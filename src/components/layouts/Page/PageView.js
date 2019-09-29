@@ -1,15 +1,22 @@
-import React, {Fragment} from 'react';
-import Header from '../Header/Header'
-import Footer from '../Footer/Footer'
+import React from 'react';
+import { element } from 'prop-types';
+import Header from '../Header/Header';
+import Footer from '../Footer/Footer';
+
  
 const PageView = (props) => {
-	return(
-		<Fragment>
-			<Header />
-				{props.children}
-			<Footer />
-		</Fragment>
-	)
-}
+  const { children } = props;
+  return (
+    <>
+      <Header />
+      	{children}
+      <Footer />
+    </>
+  );
+};
 
-export default PageView
+PageView.propTypes = {
+  children: element.isRequired
+};
+
+export default PageView;

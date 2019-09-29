@@ -1,18 +1,25 @@
-import React, {Component} from 'react'
-import PageView from './PageView'
+import React, { Component } from 'react';
+import { element } from 'prop-types';
+import PageView from './PageView';
 
 class Page extends Component {
-	constructor(props) {
-		super()
-	}
+	static propTypes = {
+  		children: element.isRequired
+	};
+
+  	constructor(props) {
+	  super();
+  	}
 
 	render() {
-		return(
-			<PageView>
-				{this.props.children}
-			</PageView>
-		)
+  		const { children } = this.props;
+  		return (
+    		<PageView>
+      			{children}
+    		</PageView>
+  		);
 	}
 }
 
-export default Page
+
+export default Page;

@@ -1,9 +1,22 @@
 import React from 'react'; 
+import { func, string } from 'prop-types';
 
-const ImgLoad = (props) => {
-	return(
-		<img className="img-fluid w20" src={props.img} alt='img' onLoad={props.loadImg} onError={props.errImg} />
-	)
-}
+const ImgLoad = ({ img, loadImg, errImg }) => {
+  return (
+    <img
+      className="img-fluid w20"
+      src={img}
+      alt="img" 
+      onLoad={loadImg} 
+      onError={errImg}
+    />
+  );
+};
 
-export default ImgLoad
+ImgLoad.propTypes = {
+  img: string.isRequired,
+  loadImg: func.isRequired,
+  errImg: func.isRequired
+};
+
+export default ImgLoad;

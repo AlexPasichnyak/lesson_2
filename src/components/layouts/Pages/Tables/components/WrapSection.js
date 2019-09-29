@@ -1,12 +1,17 @@
 import React from 'react';
+import { node } from 'prop-types';
 
 const WrapSection = (props) => {
-	return(
+  const { children } = props;
+  return (
+    <section className="b-b pt-4 pb-4">
+      {children}
+    </section>
+  );
+};
 
-		<section className="b-b pt-4 pb-4">
-			{props.children}
-		</section>
-	)
-}
+WrapSection.propTypes = {
+  children: node.isRequired
+};
 
-export default WrapSection
+export default WrapSection;

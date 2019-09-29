@@ -1,16 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-// import './assets/style.css';
 import './assets/font-awesome-4.7.0/css/font-awesome.min.css';
-import App from './App';
 import { BrowserRouter } from 'react-router-dom';
+import App from './App';
 import * as serviceWorker from './serviceWorker';
 
 const application = (
-	<BrowserRouter>
-		<App />
-	</BrowserRouter>
-)
+  <BrowserRouter>
+    <App />
+  </BrowserRouter>
+);
 
 ReactDOM.render(application, document.getElementById('root'));
 

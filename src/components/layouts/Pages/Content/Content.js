@@ -1,20 +1,20 @@
-import React, {Component, Fragment} from 'react';
-import Home from '../Home/Home'
-import ContentView from './ContentView'
+import React, { Component } from 'react';
+import Home from '../Home/Home';
+import ContentView from './ContentView';
 
 class Content extends Component {
-	constructor(props) {
-		super()
-	}
+  constructor(props) {
+    super();
+  }
 
-	render() {
-		return(
-			<Fragment>
-				<Home/>
-				<ContentView/>
-			</Fragment>
-		)
-	}
+  render() {
+    return (
+      <>
+        <Home />
+        <ContentView />
+      </>
+    );
+  }
 }
 
-export default Content
+export default Content;
