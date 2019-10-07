@@ -4,8 +4,8 @@ import PropTypes from 'prop-types';
 const TableUsers = ({ dragOver, dropHandler, view }) => {
   return (
     <table
-      className="table table-striped table-dark" 
-      onDragOver={dragOver} 
+      className="table table-striped table-dark"
+      onDragOver={dragOver}
       onDrop={dropHandler}
     >
       <thead>
@@ -15,9 +15,7 @@ const TableUsers = ({ dragOver, dropHandler, view }) => {
           <th scope="col">Компания</th>
         </tr>
       </thead>
-      <tbody id="table_users">
-        {view}
-      </tbody>
+      <tbody id="table_users">{view}</tbody>
     </table>
   );
 };
@@ -25,7 +23,7 @@ const TableUsers = ({ dragOver, dropHandler, view }) => {
 TableUsers.propTypes = {
   dragOver: PropTypes.func,
   dropHandler: PropTypes.func,
-  view: PropTypes.array
+  view: PropTypes.node
 };
 TableUsers.defaultProps = {
   dragOver: PropTypes.func,

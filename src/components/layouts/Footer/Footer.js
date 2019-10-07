@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import FooterView from './FooterView';
 import '../../../scss/layouts/Footer.scss';
 
-
 class Footer extends Component {
   constructor(props) {
     super(props);
@@ -15,24 +14,68 @@ class Footer extends Component {
         email: 'aleksa.intel@gmail.com'
       },
       author: 'Oleksandr Pasichnyak',
-      nick: 'Sancho Paska'
+      nick: 'Sancho Paska',
+      btnScroll: {
+        btnUp: false,
+        btnDown: false
+      }
     };
   }
 
+  componentDidMount() {
+    window.addEventListener('scroll', this.scrollHandler);
+  }
+
+  scrollHandler = () => {
+    const {
+      btnScroll: { btnUp, btnDown }
+    } = this.state;
+    const coordY = window.pageYOffset;
+    const heightWindow = document.body.scrollHeight - window.innerHeight;
+    const btnToTop = coordY >= 250;
+    const btnToBottom = coordY <= heightWindow - 250;
+    if (btnToTop !== btnUp || btnToBottom !== btnDown) {
+      this.setState({
+        btnScroll: {
+          btnUp: btnToTop,
+          btnDown: btnToBottom
+        }
+      });
+    }
+  };
+
+  scrollUp = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  };
+
+  scrollDown = () => {
+    window.scrollTo({
+      top: document.body.scrollHeight - window.innerHeight,
+      behavior: 'smooth'
+    });
+  };
+
   render() {
-    const { address } = this.state;
-    const { author } = this.state;
-    const { nick } = this.state;
-    
+    const {
+      address, author, nick, btnScroll 
+    } = this.state;
+
     return (
       <FooterView
         addresspost={address.postcode}
-        region={address.region} 
-        tel={address.tel} 
-        country={address.country} 
-        email={address.email} 
-        nick={nick} 
-        author={author} 
+        region={address.region}
+        tel={address.tel}
+        country={address.country}
+        email={address.email}
+        nick={nick}
+        author={author}
+        btnUp={btnScroll.btnUp}
+        btnDown={btnScroll.btnDown}
+        scrollUp={this.scrollUp}
+        scrollDown={this.scrollDown}
       />
     );
   }

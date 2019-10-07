@@ -10,7 +10,9 @@ const HeaderView = () => {
           <div className="row justify-content-center">
             <div className="col col-md-8 text-center">
               <h1>
-                <a className="nav-link" href="./">{titleSite}</a>
+                <a className="nav-link" href="./">
+                  {titleSite}
+                </a>
               </h1>
             </div>
           </div>
@@ -23,16 +25,22 @@ const HeaderView = () => {
               <div className="col-12 text-center">
                 <ul className="nav justify-content-center">
                   <li className="nav-item">
-                    <a className="nav-link" href="/">Home</a>
+                    <a className="nav-link" href="/">
+                      Home
+                    </a>
                   </li>
                   <li className="nav-item">
-                    <a className="nav-link" href="/content">Content</a>
+                    <a className="nav-link" href="/content">
+                      Content
+                    </a>
                   </li>
                   <li className="nav-item">
-                    <a className="nav-link" href="/tables">Tables</a>
+                    <a className="nav-link" href="/tables">
+                      Tables
+                    </a>
                   </li>
                 </ul>
-              </div>  
+              </div>
             </div>
           </div>
         </section>

@@ -7,25 +7,24 @@ import Content from './components/layouts/Pages/Content/Content';
 import Tables from './components/layouts/Pages/Tables/Tables';
 import './scss/App.scss';
 
-
 class App extends Component {
   constructor(props) {
-	  super(props);
-	  this.history = createBrowserHistory();
+    super(props);
+    this.history = createBrowserHistory();
   }
 
   render() {
-	    return (
-  <Router history={this.history}>
-    <Page>
-      <Switch>
-        <Route path="/" exact component={Home} />
-        <Route path="/content" component={Content} /> 
-        <Route path="/tables" exact strict component={Tables} /> 	        	
-      </Switch>
-    </Page>
-  </Router>
-	    );		
+    return (
+      <Router history={this.history}>
+        <Page>
+          <Switch>
+            <Route path="/" exact component={Home} />
+            <Route path="/content" component={Content} />
+            <Route path="/tables" exact strict component={Tables} />
+          </Switch>
+        </Page>
+      </Router>
+    );
   }
 }
 

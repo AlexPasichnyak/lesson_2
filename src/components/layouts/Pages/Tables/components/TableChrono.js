@@ -8,9 +8,7 @@ const TableChrono = ({ toggleSortByYear, sortByEvent, view }) => {
       <thead>
         <ButtonSort sortByYear={toggleSortByYear} sortByEvent={sortByEvent} />
       </thead>
-      <tbody>
-        {view}
-      </tbody>
+      <tbody>{view}</tbody>
     </table>
   );
 };

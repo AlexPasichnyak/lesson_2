@@ -36,9 +36,7 @@
         &:hover::after {
           transform: scale(1);
         }
-        
     }
-    
 }
 
 .details_link {
@@ -55,6 +53,14 @@
   }
   .d-bl {
     display: block;
+  }
+  .description {
+    display: none;
+  }
+  &:hover .description{
+    transition: .4s all;
+    display: block;
+    margin-top: 2rem;
   }
 }
 .shad:hover {

@@ -4,8 +4,6 @@ import '../../../../scss/layouts/Pages/Home.scss';
 
 export default class Home extends React.Component {
   render() {
-    return (
-      <HomeView />
-    );
+    return <HomeView />;
   }
 }

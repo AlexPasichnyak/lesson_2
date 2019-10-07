@@ -4,8 +4,6 @@ import '../../../scss/layouts/Header.scss';
 
 export default class Header extends React.Component {
   render() {
-    return (
-      <HeaderView />
-    );
+    return <HeaderView />;
   }
-} 
+}

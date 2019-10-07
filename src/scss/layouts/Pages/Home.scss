@@ -6,8 +6,7 @@
     background-color: #008cff;
   }
 }
-
-label {
+/* label {
   display: block;
   margin: 10px auto;
   &:before{
@@ -34,7 +33,7 @@ label {
     content: "\25B2";
     font-size: 1.5em;
     cursor: pointer;
-}
+} */
 .list-counter-square {
   list-style: none;
   counter-reset: list;

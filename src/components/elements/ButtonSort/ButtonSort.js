@@ -5,17 +5,25 @@ const ButtonSort = ({ sortByYear, sortByEvent }) => {
   return (
     <tr>
       <th scope="col">
-		  	Год
-        <button className="btn btn-sm btn-secondary ml-2" type="button" onClick={sortByYear}>
+        Год
+        <button
+          className="btn btn-sm btn-secondary ml-2"
+          type="button"
+          onClick={sortByYear}
+        >
           <i className="fa fa-sort-numeric-asc pr-1" aria-hidden="true" />
-Сортировать
+          Сортировать
         </button>
       </th>
       <th scope="col">
-Событие
-        <button className="btn btn-sm btn-secondary ml-2" type="button" onClick={sortByEvent}>
+        Событие
+        <button
+          className="btn btn-sm btn-secondary ml-2"
+          type="button"
+          onClick={sortByEvent}
+        >
           <i className="fa fa-sort-alpha-asc pr-1" aria-hidden="true" />
-Сортировать
+          Сортировать
         </button>
       </th>
     </tr>

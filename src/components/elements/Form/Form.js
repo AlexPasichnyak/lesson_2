@@ -6,13 +6,26 @@ const Form = ({ onAddEvent, onDelete }) => {
     <form className="input-group-prepend" onSubmit={onAddEvent}>
       <button className="btn btn-success" type="submit">
         <i className="fa fa-plus-square pr-1" aria-hidden="true" />
-Добавить новое событие
+        Добавить новое событие
       </button>
-      <input type="text" name="year" className="form-control" placeholder="Год" aria-label="" required />
-      <input type="text" name="eventOfLife" className="form-control mr-5" placeholder="Событие" required />								
+      <input
+        type="text"
+        name="year"
+        className="form-control"
+        placeholder="Год"
+        aria-label=""
+        required
+      />
+      <input
+        type="text"
+        name="eventOfLife"
+        className="form-control mr-5"
+        placeholder="Событие"
+        required
+      />
       <button type="button" className="btn btn-danger ml-5" onClick={onDelete}>
         <i className="fa fa-trash pr-1" aria-hidden="true" />
-Удалить Событие
+        Удалить Событие
       </button>
     </form>
   );

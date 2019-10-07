@@ -1,4 +1,4 @@
-import React from 'react'; 
+import React from 'react';
 import { func, string } from 'prop-types';
 
 const ImgLoad = ({ img, loadImg, errImg }) => {
@@ -6,8 +6,8 @@ const ImgLoad = ({ img, loadImg, errImg }) => {
     <img
       className="img-fluid w20"
       src={img}
-      alt="img" 
-      onLoad={loadImg} 
+      alt="img"
+      onLoad={loadImg}
       onError={errImg}
     />
   );

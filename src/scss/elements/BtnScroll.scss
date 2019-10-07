@@ -1,0 +1,34 @@
+.btn-up, .btn-down {
+	position: fixed;
+	right: 15px;
+	background-color: transparent;
+	padding: 10px;
+	z-index: 999;
+	border: none;
+	opacity: .5;
+	i {
+		color: #008cff;
+		font-size: 1.95rem;
+	}
+	&:focus {
+		outline:none;
+	}
+	&:hover {
+		cursor: pointer;
+		transition: .4s all;
+	}
+	
+}
+.btn-up {
+	bottom: 80px;
+	margin-bottom: 5px;
+	&:hover{
+		opacity: 1;
+	}
+}
+.btn-down {
+	bottom: 40px;
+	&:hover{
+		opacity: 1;
+	}
+}
