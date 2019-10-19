@@ -1,4 +1,5 @@
 import React from 'react';
+import BtnTogglerTheme from '../../elements/BtnTogglerTheme/BtnTogglerTheme';
 
 const HeaderView = () => {
   const titleSite = 'Основы React';
@@ -22,25 +23,26 @@ const HeaderView = () => {
         <section className="block-nav">
           <div className="container">
             <div className="row justify-content-center">
-              <div className="col-12 text-center">
+              <div className="col-8 text-center">
                 <ul className="nav justify-content-center">
                   <li className="nav-item">
                     <a className="nav-link" href="/">
-                      Home
+                          Home
                     </a>
                   </li>
                   <li className="nav-item">
                     <a className="nav-link" href="/content">
-                      Content
+                          Content
                     </a>
                   </li>
                   <li className="nav-item">
                     <a className="nav-link" href="/tables">
-                      Tables
+                          Tables
                     </a>
                   </li>
                 </ul>
               </div>
+              <BtnTogglerTheme />
             </div>
           </div>
         </section>
