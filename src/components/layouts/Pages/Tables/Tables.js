@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import Form from '../../../elements/Form/Form';
 import TableChrono from './components/TableChrono';
 import Wrapper from './components/Wrapper';
@@ -8,65 +8,59 @@ import picture from '../../../../images/picture_load.png';
 import ImgLoad from '../../../elements/ImgLoad/ImgLoad';
 import '../../../../scss/layouts/Pages/Tables.scss';
 
-export default class Tables extends Component {
-  constructor(props) {
-    super(props);
+const Tables = () => {
+  const [chronology, setChronology] = useState({
+    0: {
+      year: 1993,
+      eventOfLife:
+        'Народился в с.Дмитровка Знаменского р-на Кировоградской обл.'
+    },
+    1: { year: 1999, eventOfLife: 'Пошел в учиться в школу' },
+    2: { year: 2010, eventOfLife: 'Закончил школу' },
+    3: {
+      year: 2010,
+      eventOfLife:
+        'Поступил в Кировоградский государственный педуниверситет им. В.Винниченка'
+    },
+    4: { year: 2018, eventOfLife: 'Начал изучать веб-программирование' }
+  });
 
-    this.state = {
-      chronology: {
-        0: {
-          year: 1993,
-          eventOfLife:
-            'Народился в с.Дмитровка Знаменского р-на Кировоградской обл.'
-        },
-        1: { year: 1999, eventOfLife: 'Пошел в учиться в школу' },
-        2: { year: 2010, eventOfLife: 'Закончил школу' },
-        3: {
-          year: 2010,
-          eventOfLife:
-            'Поступил в Кировоградский государственный педуниверситет им. В.Винниченка'
-        },
-        4: { year: 2018, eventOfLife: 'Начал изучать веб-программирование' }
-      },
-      dataUsers: {},
-      isFocus: '',
-      currIndex: '',
-      isSorted: false
-    };
-  }
+  const [dataUsers, setDataUsers] = useState({});
+  const [isFocus, setFocus] = useState('');
+  const [currIndex, setCurrIndex] = useState('');
+  const [isSorted, setSorted] = useState(false);
 
-  componentDidMount() {
+  useEffect(() => {
     const url = 'https://jsonplaceholder.typicode.com/users';
     try {
       fetch(url)
         .then((response) => response.json())
         .then((data) => {
-          this.setState({ dataUsers: data });
+          if (data) {
+            setDataUsers(data);
+          }
         });
     } catch (e) {
       // console.log(e);
     }
+  }, []);
 
-    document.addEventListener('keydown', this.keyDown);
-  }
-
-  toggleSortByYear = () => {
-    const { chronology, isSorted } = this.state;
-    const arrObj = Object.values(chronology);
-    if (!isSorted) {
+  const toggleSortByYear = () => {
+    const chronoArr = { ...chronology };
+    const isSortedArr = isSorted;
+    const arrObj = Object.values(chronoArr);
+    if (!isSortedArr) {
       arrObj.sort((a, b) => a.year - b.year);
     } else {
       arrObj.reverse();
     }
-    this.setState({
-      chronology: { ...arrObj },
-      isSorted: !isSorted
-    });
+    setChronology({ ...arrObj });
+    setSorted(!isSortedArr);
   };
 
-  sortByEvent = () => {
-    const { chronology } = this.state;
-    const arrChronology = Object.values(chronology);
+  const sortByEvent = () => {
+    const chronoArr = { ...chronology };
+    const arrChronology = Object.values(chronoArr);
     let left = 0;
     let right = arrChronology.length - 1;
     let temp;
@@ -88,40 +82,40 @@ export default class Tables extends Component {
       }
       left += 1;
     } while (left < right);
-    this.setState({ chronology: { ...arrChronology } });
+    setChronology({ ...arrChronology });
   };
 
-  onAddEventHandler = (event) => {
+  const onAddEventHandler = (event) => {
     event.preventDefault();
-    const { chronology } = this.state;
+    const chronoArr = { ...chronology };
     const data = new FormData(event.target);
-    const lengthObj = Object.entries(chronology).length;
-    this.setState({
-      chronology: {
-        ...chronology,
+    const lengthObj = Object.entries(chronoArr).length;
+    setChronology(
+      {
+        ...chronoArr,
         [lengthObj]: {
           year: data.get('year'),
           eventOfLife: data.get('eventOfLife')
         }
       }
-    });
+    );
   };
 
-  onDelete = () => {
-    const { chronology } = this.state;
-    const arrChronology = Object.entries(chronology);
+  const onDelete = () => {
+    const chronoArr = { ...chronology };
+    const arrChronology = Object.entries(chronoArr);
     arrChronology.pop();
     const res = Object.fromEntries(arrChronology);
     // chronology[Object.keys(chronology).splice(-1,1)]
-    this.setState({ chronology: { ...res } });
+    setChronology({ ...res });
   };
 
-  keyDown = (e) => {
+  const keyDown = (e) => {
     const table = document.getElementById('table_users');
     const arrRows = table.childNodes;
-    const { isFocus } = this.state;
+    const focus = isFocus;
     let elem = -1;
-    if (isFocus) {
+    if (focus) {
       for (let i = 0; i < arrRows.length; i += 1) {
         if (arrRows[i].classList.value === 'bg-clicked') {
           elem = i;
@@ -129,45 +123,46 @@ export default class Tables extends Component {
       }
     }
 
-    const { currIndex } = this.state;
-    if (currIndex && currIndex + 1 === arrRows.length) {
+    const currentIndex = currIndex;
+    if (currentIndex && currentIndex + 1 === arrRows.length) {
       elem = 0;
     }
-    if (currIndex && currIndex - 1 === -1) {
+    if (currentIndex && currentIndex - 1 === -1) {
       elem = arrRows.length;
     }
     if (e.key === 'ArrowDown') {
       elem += 1;
-      if (isFocus) {
-        this.setState({
-          isFocus: isFocus.classList.remove('bg-clicked')
-        });
+      if (focus) {
+        setFocus(focus.classList.remove('bg-clicked'));
       }
-      this.setState({
-        isFocus: arrRows[elem],
-        currIndex: elem
-      });
+      setFocus(arrRows[elem]);
+      setCurrIndex(elem);
+     
       arrRows[elem].classList.add('bg-clicked');
     }
 
     if (e.key === 'ArrowUp') {
       elem -= 1;
 
-      if (isFocus) {
-        this.setState({
-          isFocus: isFocus.classList.remove('bg-clicked')
-        });
+      if (focus) {
+        setFocus(focus.classList.remove('bg-clicked'));
       }
-      this.setState({
-        isFocus: arrRows[elem],
-        currIndex: elem
-      });
+      setFocus(arrRows[elem]);
+      setCurrIndex(elem);
 
       arrRows[elem].classList.add('bg-clicked');
     }
   };
 
-  dragStart = (e) => {
+  useEffect(() => {
+    document.addEventListener('keydown', keyDown);
+
+    return () => {
+      document.removeEventListener('keydown', keyDown);
+    };
+  });
+
+  const dragStart = (e) => {
     const { target } = e;
     e.dataTransfer.setData('row_id', target.id);
     setTimeout(() => {
@@ -175,7 +170,7 @@ export default class Tables extends Component {
     }, 0);
   };
 
-  dropHandler = (e) => {
+  const dropHandler = (e) => {
     e.preventDefault();
     const rowId = e.dataTransfer.getData('row_id');
 
@@ -184,89 +179,56 @@ export default class Tables extends Component {
     e.target.parentNode.after(row);
   };
 
-  dragOver = (e) => {
+  const dragOver = (e) => {
     e.preventDefault();
   };
 
-  isActiveClass = (e) => {
+  const isActiveClass = (e) => {
     // e.target.parentNode.classList.toggle('bg-clicked');
-    const { isFocus } = this.state;
-    if (e.target.parentNode.classList.value === 'bg-clicked' && isFocus) {
+    const focus = isFocus;
+    if (e.target.parentNode.classList.value === 'bg-clicked' && focus) {
       e.target.parentNode.classList.remove('bg-clicked');
-      this.setState({ isFocus: '' });
-    } else if (!isFocus) {
-      this.setState({ isFocus: e.target.parentNode });
+      setFocus('');
+    } else if (!focus) {
+      setFocus(e.target.parentNode);
       e.target.parentNode.classList.add('bg-clicked');
     } else {
-      this.setState({
-        isFocus: isFocus.classList.remove('bg-clicked')
-      });
-      this.setState({ isFocus: e.target.parentNode });
+      setFocus(focus.classList.remove('bg-clicked'));
+      setFocus(e.target.parentNode);
       e.target.parentNode.classList.add('bg-clicked');
     }
   };
 
-  imgLoader = () => {
+  const imgLoader = () => {
     // alert('App loaded!');
   };
 
-  imgErr = () => {
+  const imgErr = () => {
     // alert('Something went wrong! Checking this image!');
   };
 
-  chronologyView = () => {
-    const { chronology } = this.state;
-    const rows = Object.entries(chronology).map(([index, chrono]) => {
-      return (
-        <tr key={index}>
-          <td>{chrono.year}</td>
-          <td>{chrono.eventOfLife}</td>
-        </tr>
-      );
-    });
-    return rows;
-  };
+  return (
+    <WrapSection>
+      <Wrapper title="Биография">
+        <TableChrono
+          view={chronology}
+          toggleSortByYear={toggleSortByYear}
+          sortByEvent={sortByEvent}
+        />
+        <Form onAddEvent={onAddEventHandler} onDelete={onDelete} />
+      </Wrapper>
+      <Wrapper title="Рандомные данные о пользователях">
+        <TableUsers
+          dragOver={dragOver}
+          dropHandler={dropHandler}
+          view={dataUsers}
+          dragStart={dragStart}
+          isActiveClass={isActiveClass}
+        />
+      </Wrapper>
+      <ImgLoad img={picture} loadImg={imgLoader} errImg={imgErr} />
+    </WrapSection>
+  );
+};
 
-  dataUsersView = () => {
-    const { dataUsers } = this.state;
-    const rows = Object.entries(dataUsers).map(([id, item]) => {
-      return (
-        <tr
-          key={id}
-          draggable="true"
-          onDragStart={this.dragStart}
-          id={`row-${id}`}
-          onClick={this.isActiveClass}
-        >
-          <td>{item.name}</td>
-          <td>{item.email}</td>
-          <td>{item.company.name}</td>
-        </tr>
-      );
-    });
-    return rows;
-  };
-
-  render() {
-    return (
-      <WrapSection>
-        <Wrapper title="Биография">
-          <TableChrono
-            view={this.chronologyView()}
-            toggleSortByYear={this.toggleSortByYear}
-            sortByEvent={this.sortByEvent}
-          />
-          <Form onAddEvent={this.onAddEventHandler} onDelete={this.onDelete} />
-        </Wrapper>
-        <Wrapper title="Рандомные данные о пользователях">
-          <TableUsers
-            dragOver={this.dragOver}
-            dropHandler={this.dropHandler}
-            view={this.dataUsersView()}
-          />
-        </Wrapper>
-        <ImgLoad img={picture} loadImg={this.imgLoader} errImg={this.imgErr} />
-      </WrapSection>
-    );
-  }
-}
+export default Tables;

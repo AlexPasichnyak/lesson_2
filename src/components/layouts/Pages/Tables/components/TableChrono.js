@@ -1,6 +1,7 @@
 import React from 'react';
-import { node, func } from 'prop-types';
+import PropTypes from 'prop-types';
 import ButtonSort from '../../../../elements/ButtonSort/ButtonSort';
+import BodyOfTable from './BodyOfTable';
 
 const TableChrono = ({ toggleSortByYear, sortByEvent, view }) => {
   return (
@@ -8,15 +9,17 @@ const TableChrono = ({ toggleSortByYear, sortByEvent, view }) => {
       <thead>
         <ButtonSort sortByYear={toggleSortByYear} sortByEvent={sortByEvent} />
       </thead>
-      <tbody>{view}</tbody>
+      <BodyOfTable view={view} />
     </table>
   );
 };
 
 TableChrono.propTypes = {
-  toggleSortByYear: func.isRequired,
-  sortByEvent: func.isRequired,
-  view: node.isRequired
+  toggleSortByYear: PropTypes.func.isRequired,
+  sortByEvent: PropTypes.func.isRequired,
+  view: PropTypes.oneOfType(
+    [PropTypes.object, PropTypes.array]
+  ).isRequired
 };
 
 export default TableChrono;
